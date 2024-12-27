@@ -1,4 +1,7 @@
 /* Tema Değişkenleri */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
 :root {
     /* Aydınlık mod değişkenleri */
     --bg-primary: #ffffff;
@@ -81,12 +84,15 @@ header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+
+
 .logo h1 {
     color: var(--nav-text);
     font-size: 1.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-family: "Agbalumo", serif;
 }
 
 .nav-links li a {
