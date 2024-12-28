@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kARTEPE  FİLE</title>
+    <title>KARTEPE  FİLE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
@@ -39,12 +39,36 @@
     </header>
 
     <!-- Ana Banner -->
-    <section id="anasayfa" class="hero" style="background-image:url('./image/gölge.jpeg');">
-        <div class="hero-content">
-            <h1 data-tr="Kaliteli Tarımsal File Çözümleri" data-en="Quality Agricultural Net Solutions">Kaliteli Tarımsal File Çözümleri</h1>
-            <p data-tr="Profesyonel tarım çözümleri için doğru adres" data-en="The right address for professional agricultural solutions">Profesyonel tarım çözümleri için doğru adres</p>
-            <a href="#urunler" class="cta-button" data-tr="Ürünlerimizi İnceleyin" data-en="View Our Products">Ürünlerimizi İnceleyin</a>
+    <section id="anasayfa" class="hero">
+        <div class="slider">
+            <div class="slide active">
+                <div class="slide-bg" style="background-image: url('/image/gölge.jpeg');"></div>
+                <div class="hero-content">
+                    <h1 data-tr="Kaliteli Tarımsal File Çözümleri" data-en="Quality Agricultural Net Solutions">Kaliteli Tarımsal File Çözümleri</h1>
+                    <p data-tr="Profesyonel tarım çözümleri için doğru adres" data-en="The right address for professional agricultural solutions">Profesyonel tarım çözümleri için doğru adres</p>
+                    <a href="#urunler" class="cta-button" data-tr="Ürünlerimizi İnceleyin" data-en="View Our Products">Ürünlerimizi İnceleyin</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('/image/sera.jpeg');"></div>
+                <div class="hero-content">
+                    <h1 data-tr="Modern Sera Çözümleri" data-en="Modern Greenhouse Solutions">Modern Sera Çözümleri</h1>
+                    <p data-tr="Yenilikçi ve dayanıklı sera örtüleri" data-en="Innovative and durable greenhouse covers">Yenilikçi ve dayanıklı sera örtüleri</p>
+                    <a href="#urunler" class="cta-button" data-tr="Detaylı Bilgi" data-en="Learn More">Detaylı Bilgi</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('/image/fındıktoplama.jpeg');"></div>
+                <div class="hero-content">
+                    <h1 data-tr="Fındık Toplama Fileleri" data-en="Hazelnut Collection Nets">Fındık Toplama Fileleri</h1>
+                    <p data-tr="Verimli hasat için özel çözümler" data-en="Special solutions for efficient harvest">Verimli hasat için özel çözümler</p>
+                    <a href="#urunler" class="cta-button" data-tr="Hemen İnceleyin" data-en="Explore Now">Hemen İnceleyin</a>
+                </div>
+            </div>
         </div>
+        <button class="slider-btn prev" aria-label="Önceki"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next" aria-label="Sonraki"><i class="fas fa-chevron-right"></i></button>
+        <div class="slider-dots"></div>
     </section>
 
     <!-- Ürünler Bölümü -->

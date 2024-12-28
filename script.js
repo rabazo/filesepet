@@ -31,6 +31,148 @@ function toggleTheme(e) {
     localStorage.setItem('theme', isChecked ? 'dark' : 'light');
 }
 
+// Slider fonksiyonları
+function initSlider() {
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dotsContainer = document.querySelector('.slider-dots');
+    let currentSlide = 0;
+    let slideInterval;
+    let isTransitioning = false;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Nokta göstergelerini oluştur
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            if (!isTransitioning && currentSlide !== index) {
+                goToSlide(index);
+                resetInterval();
+            }
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    // Slaytı değiştir
+    function goToSlide(n) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        
+        currentSlide = (n + slides.length) % slides.length;
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 1000);
+    }
+
+    // Sonraki slayta geç
+    function nextSlide() {
+        if (!isTransitioning) {
+            goToSlide(currentSlide + 1);
+        }
+    }
+
+    // Önceki slayta geç
+    function prevSlide() {
+        if (!isTransitioning) {
+            goToSlide(currentSlide - 1);
+        }
+    }
+
+    // Interval'i sıfırla
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startSlideShow();
+    }
+
+    // Otomatik geçiş başlat
+    function startSlideShow() {
+        slideInterval = setInterval(() => {
+            if (!isTransitioning && document.hasFocus()) {
+                nextSlide();
+            }
+        }, 6000);
+    }
+
+    // Otomatik geçişi durdur
+    function stopSlideShow() {
+        clearInterval(slideInterval);
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetInterval();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetInterval();
+    });
+
+    // Klavye kontrollerini ekle
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetInterval();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetInterval();
+        }
+    });
+
+    // Touch olayları
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        stopSlideShow();
+    }, { passive: true });
+
+    slider.addEventListener('touchmove', (e) => {
+        touchEndX = e.touches[0].clientX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', () => {
+        const touchDiff = touchStartX - touchEndX;
+        if (Math.abs(touchDiff) > 50) {
+            if (touchDiff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+        resetInterval();
+    });
+
+    // Mouse hover durumunda otomatik geçişi durdur
+    slider.addEventListener('mouseenter', stopSlideShow);
+    slider.addEventListener('mouseleave', startSlideShow);
+
+    // Sayfa görünür değilken slaytı durdur
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopSlideShow();
+        } else {
+            startSlideShow();
+        }
+    });
+
+    // Otomatik geçişi başlat
+    startSlideShow();
+}
+
 // Sayfa yüklendiğinde çalışacak fonksiyonlar
 document.addEventListener('DOMContentLoaded', function() {
     // Dil butonlarına tıklama olayı ekle
@@ -120,4 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         lastScroll = currentScroll;
     });
+
+    // Slider'ı başlat
+    initSlider();
 }); 
